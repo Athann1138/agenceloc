@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+<div>
+     <div class="col-md-6">
+     {{ form_row(form.modele) }}
+
+
+     </div>
+</div>
+    {{ form_widget(form.description) }}
+    {{ form_row(form.imageFile) }}
+    <button class="btn btn-success col-12 mt-3">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

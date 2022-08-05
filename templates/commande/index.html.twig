@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+    <h1>Commande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Vehicule</th>
+                <th>Montant</th>
+                <th>StartAt</th>
+                <th>EndAt</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {#
+            Commandes est un tableau d'objets
+            on le boucle
+            à chaque tour, on récupère commande : c'est un OBJET
+            on n'affiche pas un objet, mais les propriétés de l'objet
+            syntaxe : objet.propriété
+            exemple commande.id
+
+            certaines propriétés sont relationnelles, autrement dit, la propriété est un objet
+            syntaxe : objet.objet.propriété
+            exemple : commande.user.prenom
+        #}
+        {% for commande in commandes %}
+        
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.user.prenom }} {{ commande.user.nom }}</td>
+                <td>{{ commande.vehicule.titre }}</td>
+                <td>{{ commande.montant }}</td>
+                <td>{{ commande.startAt ? commande.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande.endAt ? commande.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande.createdAt ? commande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
+                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}">Create new</a>
+{% endblock %}
