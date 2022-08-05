@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Mon profil{% endblock %}
+
+{% block h1 %}Mon profil{% endblock %}
+
+{% block body %}
+
+<ul class="list-group col-md-6 mx-auto">
+  <li class="list-group-item">Email : {{ app.user.email }}</li>
+  
+  
+  {# d/m/Y H:i:s #}
+</ul>
+
+
+{% endblock %}
